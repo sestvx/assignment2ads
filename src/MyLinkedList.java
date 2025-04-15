@@ -129,8 +129,7 @@ public class MyLinkedList<T> implements MyList<T> {
 
     @Override
     public void sort() {
-        // Convert to array, sort, then rebuild the list
-        Object[] array = toArray();
+       Object[] array = toArray();
         Arrays.sort(array);
         clear();
         for (Object item : array) {
