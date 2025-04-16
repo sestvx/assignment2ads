@@ -1,4 +1,3 @@
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -129,12 +128,22 @@ public class MyLinkedList<T> implements MyList<T> {
 
     @Override
     public void sort() {
-       Object[] array = toArray();
-        Arrays.sort(array);
-        clear();
-        for (Object item : array) {
-            add((T) item);
-        }
+        if (size <= 1) return;
+
+        boolean swapped;
+        do {
+            swapped = false;
+            MyNode<T> current = head;
+            while (current.next != null) {
+                if (((Comparable<T>) current.data).compareTo(current.next.data) > 0) {
+                    T temp = current.data;
+                    current.data = current.next.data;
+                    current.next.data = temp;
+                    swapped = true;
+                }
+                current = current.next;
+            }
+        } while (swapped);
     }
 
     @Override
